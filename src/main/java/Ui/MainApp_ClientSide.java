@@ -5,7 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import server.MyServer;
+import server.ServerClient;
+
 
 public class MainApp_ClientSide extends Application {
     Parent root;
@@ -19,7 +20,7 @@ public class MainApp_ClientSide extends Application {
             scene = new Scene(root,600,400);
             stage.setScene(scene);
             stage.show();
-            MyServer myServer = new MyServer(uiController);
+            ServerClient myServer = new ServerClient("127.0.0.1");
         }catch (Exception e){
             e.printStackTrace();
         }

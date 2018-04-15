@@ -1,6 +1,6 @@
 package Ui;
 
-import Services.Service;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,8 +12,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import repository.AngajarRepo;
-import repository.ConcurentRepo;
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -35,20 +34,17 @@ public class UiController implements Initializable{
     @FXML private TextField proba_Tfield;
 
 
-    AngajarRepo aRepo = new AngajarRepo();
-    ConcurentRepo concurentRepo = new ConcurentRepo();
-    Service service = new Service();
 
     @FXML
     public void showNames(ActionEvent event){
-        this.uiTextArea.setText(service.showAllContesantNames());
+        this.uiTextArea.setText("work-in-progress");
     }
 
     public void setLabels(){
 
-        String desenT="Nr. de concurenti la desen "+concurentRepo.countDesen().toString();
-        String poezieT="Nr. de concurenti la poezie "+concurentRepo.countPoezie();
-        String comoriT="Nr. de concurenti la comori "+concurentRepo.countComori();
+        String desenT="Nr. de concurenti la desen";
+        String poezieT="Nr. de concurenti la poezie";
+        String comoriT="Nr. de concurenti la comori";
         this.desen.setText(desenT);
         this.poezie.setText(poezieT);
         this.comori.setText(comoriT);
@@ -56,11 +52,11 @@ public class UiController implements Initializable{
 
     @FXML
     public void addContestant(ActionEvent event){
-        service.addNewConcurent(this.userName_Tfield.getText(),this.userProba_Tfield.getText(),Integer.parseInt(this.userAge_Tfield.getText()));
+       // service.addNewConcurent(this.userName_Tfield.getText(),this.userProba_Tfield.getText(),Integer.parseInt(this.userAge_Tfield.getText()));
         this.userName_Tfield.setPromptText("Nume");
         this.userAge_Tfield.setPromptText("Varsta");
 
-        this.uiTextArea.setText(service.searchByProba(this.userProba_Tfield.getText()));
+        this.uiTextArea.setText("work-in-progress");
         this.userProba_Tfield.setPromptText("Proba");
 
         this.setLabels();
@@ -68,33 +64,33 @@ public class UiController implements Initializable{
 
     @FXML
     public void searchByCategory(ActionEvent event){
-        this.uiTextArea.setText(service.searchByCategory(this.category_Tfield.getText()));
+        this.uiTextArea.setText("work-in-progress");
     }
 
     @FXML
     public void searchByProba(ActionEvent event){
-        this.uiTextArea.setText(service.searchByProba(this.proba_Tfield.getText()));
+        this.uiTextArea.setText("work-in-progress");
     }
 
     @FXML
     public void login(ActionEvent event)throws IOException{
 
-        if(aRepo.check(this.textField_uPass.getText(),this.textField_uName.getText())){
-            Parent root = FXMLLoader.load(getClass().getResource("/MainView.fxml"));
-
-            Scene secondScene = new Scene(root,600,400);
-            Stage primaryStage = (Stage)this.textField_uName.getScene().getWindow();
-        primaryStage.setScene(secondScene);
-        }
-        else
-            System.out.print("Fail");
+//        if(aRepo.check(this.textField_uPass.getText(),this.textField_uName.getText())){
+//            Parent root = FXMLLoader.load(getClass().getResource("/MainView.fxml"));
+//
+//            Scene secondScene = new Scene(root,600,400);
+//            Stage primaryStage = (Stage)this.textField_uName.getScene().getWindow();
+//        primaryStage.setScene(secondScene);
+//        }
+//        else
+//            System.out.print("Fail");
 
     }
 
     @FXML
     public void showAllConcurenti(ActionEvent event){
         this.uiTextArea.setText("");
-        this.uiTextArea.setText(service.showAllConcurenti());
+        this.uiTextArea.setText("work-in-progress");
     }
 
     @Override

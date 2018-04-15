@@ -18,9 +18,10 @@ public class ServerClient {
     private Socket connection;
     private UiController uiController;
     //constructor
-    public ServerClient(String host,UiController uiController){
+
+    public ServerClient(String host ){
         serverIP = host;
-        this.uiController=uiController;
+
     }
 
     public void startRunning()throws IOException{

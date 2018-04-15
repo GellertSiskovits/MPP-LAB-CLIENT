@@ -12,7 +12,7 @@ public class ServerClientTest extends Application {
     Scene scene;
     UiController uiController = new UiController();
 
-    public  void start(Stage stage) {
+    public void start(Stage stage) {
 
         //  Menu.run();
         try {
@@ -20,7 +20,7 @@ public class ServerClientTest extends Application {
 
             scene = new Scene(root, 600, 400);
             stage.setScene(scene);
-            ServerClient myServer = new ServerClient("127.0.0.1", uiController);
+            ServerClient myServer = new ServerClient("127.0.0.1");
 
             stage.show();
             myServer.startRunning();
