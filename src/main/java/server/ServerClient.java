@@ -7,6 +7,7 @@ import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
 
 public class ServerClient {
@@ -17,28 +18,28 @@ public class ServerClient {
     private Socket connection;
     private UiController uiController;
     //constructor
-    public ServerClient(String host){
+    public ServerClient(String host,UiController uiController){
         serverIP = host;
-
+        this.uiController=uiController;
     }
 
-    public void startRunning(){
+    public void startRunning()throws IOException{
         try{
             connecctToServer();
             setupStreams();
             whileConnected();
         }catch (EOFException ex){
             showMessage("\n Client Terminated the Connection\n");
-        }catch (IOException ex){
-            ex.printStackTrace();
+        }catch (IOException ex1){
+            ex1.printStackTrace();
         }finally {
             closeConnection();
         }
     }
 
     private void connecctToServer() throws  IOException{
-        System.out.print("\nWaiting for Connection...\n");
-        connection=server.accept();
+        System.out.print("\nAttempting Connection...\n");
+        connection= new Socket(InetAddress.getByName(serverIP),5555);
         System.out.print("\nConnected to Server"+connection.getInetAddress().getHostName()+"\n");
     }
 
@@ -83,5 +84,15 @@ public class ServerClient {
     //updates main Window
     public void showMessage(final String text){
         this.uiController.getUiTextArea().appendText(text);
+    }
+
+    private void sendMessage(String message){
+        try{
+            output.writeObject("CLIENT - "+message);
+            output.flush();
+            showMessage("\nCLIENT - \n"+message);
+        }catch (IOException ex){
+            this.uiController.getUiTextArea().appendText("\nSomething Went Wrong\n");
+        }
     }
 }
